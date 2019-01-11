@@ -1,0 +1,228 @@
+.root
+{
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+    -fx-font-family: sans-serif;
+    -fx-background-color: white;
+    
+    /*variables*/
+    brightnavy: #2266CC;
+    verydarkgrey: #292929;
+    frenchblue: #3388EE;
+}
+
+/* -------------- Program-Wide Design -------------- */
+/* ------- Button ------- */
+.button
+{
+	-fx-background-color: frenchblue;
+	-fx-text-fill: white;
+    -fx-background-radius: 0.75em;
+}
+.button:hover
+{
+	-fx-background-color: derive(frenchblue, 15%);
+}
+.button:armed
+{
+	-fx-background-color: derive(frenchblue, -10%);
+}
+#add-button
+{
+	-fx-font-size: 20;
+	-fx-background-radius: 2em;
+}	
+/* ------- Check Boxes ------- */
+.check-box .box
+{
+	-fx-background-color: frenchblue;
+    -fx-background-radius: 0.5em;
+}
+.check-box:hover .box
+{
+	-fx-background-color: derive(frenchblue, 15%);
+}
+.check-box:selected .mark
+{
+	-fx-background-color: white;
+}
+
+/* ------- Combo Box ------- */
+.combo-box
+{
+    -fx-background-color: frenchblue;
+}
+/* Combobox Hover */
+.combo-box:hover 
+{
+    -fx-background-color: derive(frenchblue,15%);
+}
+/* Combobox List */
+.combo-box .list-view .list-cell
+{
+	-fx-background-color: white;
+	-fx-text-fill: black;
+}
+/* Combobox Selected Item */
+.combo-box .list-cell
+{
+	-fx-text-fill: white;
+}
+/* Arrow */
+.combo-box .arrow
+{  
+	-fx-mark-color: white ;  
+}  
+/* Combobox List Hover */
+.combo-box .list-view .list-cell:filled:hover 
+{
+    -fx-background-color: frenchblue;
+    -fx-text-fill: white;
+}
+/* Combobox List Already Selected */
+.combo-box .list-view .list-cell:filled:selected, .combo-box .list-view .list-cell:filled:selected:hover 
+{
+    -fx-background-color: brightnavy;
+    -fx-text-fill: white;
+}
+/* Combobox Scrollwheel Increment Buttons */
+.combo-box .increment-button ,.combo-box .decrement-button
+{
+    -fx-background-color: transparent;
+	-fx-background-radius: 2em;
+}
+/* Combobox Scrollwheel Track */
+.combo-box .scroll-bar:vertical .track
+{
+	-fx-background-color: white;
+	-fx-border-color: derive(verydarkgrey, 20%);
+
+	-fx-background-radius: 2em; 
+	-fx-border-radius: 2em;
+}
+/* Combobox Scrollwheel Thumb */
+.combo-box .scroll-bar:vertical .thumb
+{
+    -fx-background-color: brightnavy;
+	-fx-background-insets: 1, 0, 0;
+	-fx-background-radius: 2em;
+}
+
+
+/* -------------- Top Title -------------- */
+.app-title-box
+{
+	-fx-font-size: 40.0px;
+	-fx-font-weight: bold;
+	
+	-fx-background-color: brightnavy;
+	-fx-border-color: transparent transparent verydarkgrey transparent;
+	-fx-border-style: solid;
+	-fx-border-width: 5;
+}
+
+#app-title
+{
+	-fx-text-fill: white;
+}
+/* -------------- Add Movie Section -------------- */
+#add-movie-label
+{
+	-fx-font-size: 20;
+}
+
+/* -------------- Top Movie Section -------------- */
+#top-movie-tag, #top-movie-info
+{
+    -fx-font-size: 20;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* -------------- Table View -------------- */
+
+/* ------- Column Headers ------- */
+/* Header Cells */
+.table-view .column-header,
+.table-view .column-header-background .filler
+{
+    -fx-background-color:  brightnavy;
+    -fx-border-color: derive(brightnavy, 20%);
+}
+/* Header Labels */
+.table-view .column-header .label
+{
+   -fx-text-fill: white;
+   -fx-font-weight: bold;
+}
+/* Sort Arrow */
+.table-view .arrow
+{  
+	-fx-mark-color: white ;  
+}  
+/* ------- Cells ------- */
+/* Unwatched, Unselected Row */
+.table-view .cell
+{
+	-fx-cell-size: 35;
+	-fx-border-width: 0;
+	-fx-background-color: frenchblue;
+	-fx-text-fill: white;
+	-fx-alignment: center-left ;
+}
+/* Selected Row */
+.table-row-cell:selected .cell,
+.table-row-cell:movie-watched:selected .cell
+{
+	-fx-background-color: white; 
+	-fx-text-fill: brightnavy;      
+}
+/* Row of Watched Movie */
+.table-row-cell:movie-watched .cell
+{
+	-fx-background-color: verydarkgrey; 
+	-fx-text-fill: white; 
+}
+/* Date, Seen, and Both Rating Columns */
+#rating-column, #imdb-rating-column, #date-column, #watched-column
+{
+	-fx-alignment: center;
+}
+
+/* ------- Scroll Bar ------- */
+/* TableView Scrollwheel Increment */
+.table-view .increment-button ,.table-view .decrement-button
+{
+    -fx-background-color: transparent;
+	-fx-background-radius: 2em;
+}
+/* TableView Scrollwheel Track */
+.table-view .scroll-bar:horizontal .track,
+.table-view .scroll-bar:vertical .track
+{
+	-fx-background-color: white;
+	-fx-border-color: derive(verydarkgrey, 20%);
+
+	-fx-background-radius: 2em; 
+	-fx-border-radius: 2em;
+}
+/* TableView Scrollwheel Thumb */
+.table-view .scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:vertical .thumb
+{
+    -fx-background-color: brightnavy;
+	-fx-background-insets: 1, 0, 0;
+	-fx-background-radius: 2em;
+}

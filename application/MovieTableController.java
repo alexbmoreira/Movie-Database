@@ -2,8 +2,8 @@ package application;
 
 import movies.*;
 import exceptions.*;
+import sql.*;
 
-import java.io.File;
 import java.text.*;
 import java.util.ArrayList;
 
@@ -28,11 +28,10 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
-import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
  * View-Controller for the movie table.
@@ -42,6 +41,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 public class MovieTableController
 {
+	String username, password;
 	NumberFormat formatter = new DecimalFormat("#0.0");
 
 	MovieCatalog movieList = new MovieCatalog();
@@ -140,7 +140,9 @@ public class MovieTableController
 	TableColumn<Movie, String> watchedColumn;
 	@FXML
 	Label numMovies;
-
+	@FXML
+	Label saveLabel; 
+	
 	private Callback<TableColumn<Movie, String>, TableCell<Movie, String>> defaultTextFieldCellFactory = TextFieldTableCell
 			.<Movie>forTableColumn();
 	private ObservableList<Movie> masterData = FXCollections.observableArrayList();
@@ -151,14 +153,20 @@ public class MovieTableController
 	{
 	}
 
+	public void setUsername(String username)
+	{
+		this.username = username;
+	}
+
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+
 	public void setMovieList(MovieCatalog movieList)
 	{
-		if(movieList.getCatalog().isEmpty())
-		{
-			movieList.initializeMovieList();
-		}
-
 		this.movieList = movieList;
+		this.movieList.shuffle();
 		for(Movie movie : this.movieList.getCatalog())
 		{
 			masterData.add(movie);
@@ -202,7 +210,8 @@ public class MovieTableController
 			topMovie = movieList.findTopRated();
 			try
 			{
-				String rating = formatter.format(Double.parseDouble(topMovie.getRating()));
+				double round = Math.round(Double.parseDouble(topMovie.getRating()) * 10) / 10.0;
+				String rating = formatter.format(round);
 				topMovieLabel.setText(topMovie.getTitle() + " - " + rating);
 
 				ObservableList<String> genresList = FXCollections.observableArrayList();
@@ -259,10 +268,11 @@ public class MovieTableController
 		movieRecommendButton
 				.setTooltip(new Tooltip("Sort movies by most recommended\n" + "for you based on your top movie."));
 		addButton.setTooltip(
-				new Tooltip("Fill out all the fields and click\n" + "here to add the movie to your database."));
-		toggleSeenButton
-				.setTooltip(new Tooltip("Mark a movie as seen so it is not\n" + "recommended for you in the future.\n" +
-										"This can also be done by pressing spacebar."));
+				new Tooltip("Fill out all the fields and click\n" + "here to add the movie to your database.\n\n"
+						+ "*Note: If you add your own movie\n" + "you must mark it as watched to save it\n"
+						+ "to your account. It will be taken\n" + "into account for recommendations."));
+		toggleSeenButton.setTooltip(new Tooltip("Mark a movie as seen so it is not\n"
+				+ "recommended for you in the future.\n" + "This can also be done by pressing spacebar."));
 	}
 
 	/**
@@ -315,7 +325,8 @@ public class MovieTableController
 					}
 					else
 					{
-						rating = formatter.format(ratingNum);
+						double round = Math.round(ratingNum * 10) / 10.0;
+						rating = formatter.format(round);
 					}
 				}
 				else
@@ -579,7 +590,7 @@ public class MovieTableController
 	}
 
 	@FXML
-	private void handleRowSelect(KeyEvent event)
+	private void handleKeyInput(KeyEvent event)
 	{
 		int index = movieTable.getSelectionModel().getSelectedIndex();
 
@@ -593,6 +604,17 @@ public class MovieTableController
 		{
 			toggleWatched();
 		}
+		movieTable.getSelectionModel().select(index);
+	}
+
+	@FXML
+	private void handleRowSelect(MouseEvent event)
+	{
+		int index = movieTable.getSelectionModel().getSelectedIndex();
+		if(index + 1 != 0)
+		{
+			numMovies.setText("Movie " + (index + 1) + "/" + movieTable.getItems().size());
+		}
 	}
 
 	public void updateLabel()
@@ -602,21 +624,25 @@ public class MovieTableController
 
 	public void save()
 	{
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+		saveLabel.setText("Saving...");
+		saveLabel.setTextFill(Color.BLACK);
+		
+		DBConnect connection = new DBConnect();
+		MovieCatalog seen = new MovieCatalog();
 
-		// Set extension filter for text files
-		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("All Plain Text Files", "*.txt", "*.csv"),
-				new ExtensionFilter("Text Files", "*.txt"),
-				new ExtensionFilter("Comma-Seperated Value Files", "*.csv"));
-
-		// Show save file dialog
-		Stage stage = (Stage) (anchorPane.getScene().getWindow());
-		File file = fileChooser.showSaveDialog(stage);
-
-		if(file != null)
+		for(Movie movie : movieList.getCatalog())
 		{
-			movieList.saveToFile(file);
+			if(movie.getWatched())
+			{
+				seen.addMovie(movie);
+			}
+		}
+
+		String setToLabel = connection.saveData(username, password, seen);
+		saveLabel.setText(setToLabel);
+		if(saveLabel.getText().equals("Connection Error"))
+		{
+			saveLabel.setTextFill(Color.RED);
 		}
 	}
 

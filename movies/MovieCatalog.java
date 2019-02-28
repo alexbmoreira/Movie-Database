@@ -22,10 +22,10 @@ public class MovieCatalog
 		return catalog;
 	}
 
-	public void initializeMovieList()
+	public void initializeMovieList(String username, String password)
 	{
 		DBConnect connection = new DBConnect();
-		catalog = connection.getNewData();
+		catalog = connection.getData(username, password);
 	}
 
 	public void importFromFile(String filename)
@@ -134,6 +134,18 @@ public class MovieCatalog
 		}
 	}
 
+	public Movie findMovie(String title, String date)
+	{
+		for(Movie movie : catalog)
+		{
+			if(movie.getTitle().equals(title) && movie.getDate().equals(date))
+			{
+				return movie;
+			}
+		}
+		return new Movie();
+	}
+	
 	public void setMovie(int index, Movie movie)
 	{
 		catalog.set(index, movie);

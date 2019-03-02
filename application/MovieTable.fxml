@@ -44,7 +44,7 @@
          <center>
             <AnchorPane prefHeight="367.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                <children>
-                  <SplitPane fx:id="splitPane" dividerPositions="0.425" orientation="VERTICAL" prefHeight="631.0" prefWidth="1000.0" style="-fx-border-style: none;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.399999999999977">
+                  <SplitPane fx:id="splitPane" dividerPositions="0.0" orientation="VERTICAL" prefHeight="631.0" prefWidth="1000.0" style="-fx-border-style: none;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.399999999999977">
                      <items>
                         <HBox alignment="BOTTOM_CENTER" prefHeight="103.0" prefWidth="980.0" spacing="15.0" styleClass="table-options" SplitPane.resizableWithParent="false">
                            <children>
@@ -81,7 +81,7 @@
                         <Insets left="10.0" right="10.0" top="10.0" />
                      </padding>
                   </SplitPane>
-                  <TitledPane fx:id="titledPane" prefWidth="1000.0" text="Add Movie" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <TitledPane fx:id="titledPane" expanded="false" prefWidth="1000.0" text="Add Movie" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <content>
                         <VBox prefHeight="200.0" prefWidth="998.0">
                            <children>

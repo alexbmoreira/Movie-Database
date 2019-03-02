@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -16,117 +19,154 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="anchorpane" fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MovieTableController">
+<AnchorPane id="anchorpane" fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MovieTableController">
   <children>
-      <HBox alignment="CENTER" prefHeight="92.0" prefWidth="1000.0" styleClass="app-title-box" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <HBox alignment="CENTER" prefHeight="70.0" prefWidth="970.0" styleClass="app-title-box" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label id="app-title" alignment="CENTER" text="Movie Database" textAlignment="CENTER" />
          </children>
       </HBox>
-      <VBox layoutX="15.0" layoutY="95.0" prefHeight="223.0" prefWidth="970.0" spacing="3.0" styleClass="add-movie-vbox" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
-         <children>
-            <Label id="add-movie-label" prefHeight="30.0" prefWidth="970.0" text="Add Movie:" />
-            <HBox alignment="CENTER_LEFT" prefHeight="28.0" spacing="15.0" styleClass="add-movie-top-section">
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="107.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label prefHeight="18.0" prefWidth="50.0" text="Title:" />
-                  <TextField fx:id="addTitle" onAction="#addMovie" prefHeight="26.0" prefWidth="408.0" promptText="Movie Title..." />
-                  <Region prefHeight="26.0" prefWidth="13.0" />
-                  <Label prefHeight="18.0" prefWidth="53.0" text="Date:" />
-                  <ComboBox fx:id="addDate" prefHeight="26.0" prefWidth="86.0" />
-                  <Region prefHeight="28.0" prefWidth="77.0" />
-                  <Label prefHeight="18.0" prefWidth="104.0" text="IMDb Rating:" />
-                  <ComboBox fx:id="addRating" prefHeight="26.0" prefWidth="89.0" />
+                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="998.0" spacing="15.0" styleClass="top-movie-section" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0">
+                     <children>
+                        <Label id="top-movie-tag" alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" text="Top Movie:" />
+                        <Label id="top-movie-info" fx:id="topMovieLabel" alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" text="N/A" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" text="Search:" />
+                        <ComboBox fx:id="topGenresDropDown" onAction="#searchTopMovie" prefWidth="150.0" style="-fx-border-style: none,solid;" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <Label text="Genres:" />
-            <GridPane prefHeight="122.0" prefWidth="900.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0000244140625" minWidth="10.0" prefWidth="135.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.93331298828124" minWidth="10.0" prefWidth="135.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.13338623046872" minWidth="10.0" prefWidth="135.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.79995117187502" minWidth="10.0" prefWidth="135.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.13338623046877" minWidth="10.0" prefWidth="135.0" />
-                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="186.2000610351563" minWidth="10.0" prefWidth="135.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="182.4000366210937" minWidth="10.0" prefWidth="135.1999389648438" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="367.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                <children>
-                  <CheckBox fx:id="actionBox" mnemonicParsing="false" text="Action" />
-                  <CheckBox fx:id="adventureBox" mnemonicParsing="false" text="Adventure" GridPane.columnIndex="1" />
-                  <CheckBox fx:id="animationBox" mnemonicParsing="false" text="Animation" GridPane.columnIndex="2" />
-                  <CheckBox fx:id="biographyBox" mnemonicParsing="false" text="Biography" GridPane.columnIndex="3" />
-                  <CheckBox fx:id="comedyBox" mnemonicParsing="false" text="Comedy" GridPane.columnIndex="4" />
-                  <CheckBox fx:id="crimeBox" mnemonicParsing="false" text="Crime" GridPane.columnIndex="5" />
-                  <CheckBox fx:id="documentaryBox" mnemonicParsing="false" text="Documentary" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <CheckBox fx:id="dramaBox" mnemonicParsing="false" text="Drama" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <CheckBox fx:id="familyBox" mnemonicParsing="false" text="Family" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <CheckBox fx:id="fantasyBox" mnemonicParsing="false" text="Fantasy" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <CheckBox fx:id="historyBox" mnemonicParsing="false" text="History" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                  <CheckBox fx:id="horrorBox" mnemonicParsing="false" text="Horror" GridPane.rowIndex="2" />
-                  <CheckBox fx:id="scifiBox" mnemonicParsing="false" text="Sci-Fi" GridPane.rowIndex="3" />
-                  <CheckBox fx:id="westernBox" mnemonicParsing="false" text="Western" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                  <CheckBox fx:id="warBox" mnemonicParsing="false" text="War" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                  <CheckBox fx:id="romanceBox" mnemonicParsing="false" text="Romance" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                  <CheckBox fx:id="noirBox" mnemonicParsing="false" text="Noir" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                  <CheckBox fx:id="mysteryBox" mnemonicParsing="false" text="Mystery" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <CheckBox fx:id="musicalBox" mnemonicParsing="false" text="Musical" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <CheckBox fx:id="musicBox" mnemonicParsing="false" text="Music" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <CheckBox fx:id="sportBox" mnemonicParsing="false" text="Sport" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <CheckBox fx:id="superheroBox" mnemonicParsing="false" text="Superhero" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <CheckBox fx:id="thrillerBox" mnemonicParsing="false" text="Thriller" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                  <CheckBox fx:id="disneyBox" mnemonicParsing="false" text="Disney" GridPane.rowIndex="1" />
-                  <Button id="add-button" fx:id="addButton" mnemonicParsing="false" onAction="#addMovie" prefHeight="51.0" prefWidth="90.0" text="Add" GridPane.columnIndex="6" GridPane.rowIndex="1" GridPane.rowSpan="2" />
+                  <SplitPane fx:id="splitPane" dividerPositions="0.425" orientation="VERTICAL" prefHeight="631.0" prefWidth="1000.0" style="-fx-border-style: none;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="26.399999999999977">
+                     <items>
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="103.0" prefWidth="980.0" spacing="15.0" styleClass="table-options" SplitPane.resizableWithParent="false">
+                           <children>
+                              <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#shuffleButton" text="Shuffle" />
+                              <VBox alignment="BOTTOM_CENTER" fillWidth="false" maxHeight="75.0" prefHeight="72.0" prefWidth="224.0" spacing="3.0">
+                                 <children>
+                                    <Button fx:id="movieRecommendButton" disable="true" mnemonicParsing="false" onAction="#recommendByMovie" prefHeight="26.0" prefWidth="349.0" text="Recommend By Top Movie" />
+                                    <Button fx:id="genreRecommendButton" disable="true" mnemonicParsing="false" onAction="#recommendByGenre" prefHeight="26.0" prefWidth="251.0" text="Recommend By Top Genres" />
+                                 </children>
+                              </VBox>
+                              <Region maxHeight="5.0" maxWidth="55.0" prefWidth="60.0" />
+                              <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#deleteMovie" prefHeight="26.0" prefWidth="66.0" text="Delete" />
+                              <Button fx:id="toggleSeenButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#toggleWatched" prefHeight="26.0" prefWidth="160.0" text="Toggle Seen/Unseen" />
+                              <Region maxHeight="5.0" prefWidth="66.0" />
+                          <Label alignment="CENTER_RIGHT" minWidth="-Infinity" prefHeight="18.0" prefWidth="105.0" text="Search Table:" />
+                          <TextField fx:id="filterField" onAction="#updateLabel" prefHeight="26.0" prefWidth="151.0" />
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                      <TableView fx:id="movieTable" editable="true" onKeyPressed="#handleKeyInput" onMouseClicked="#handleRowSelect" prefHeight="351.0" prefWidth="1000.0" tableMenuButtonVisible="false">
+                        <columns>
+                          <TableColumn id="title-column" fx:id="titleColumn" editable="false" prefWidth="371.9999694824219" text="Title" />
+                              <TableColumn id="date-column" fx:id="dateColumn" editable="false" prefWidth="85.60003662109375" sortType="DESCENDING" text="Date" />
+                              <TableColumn id="genre-column" fx:id="genreColumn" editable="false" prefWidth="252.00006103515625" text="Genre(s)" />
+                              <TableColumn id="imdb-rating-column" fx:id="imdbRatingColumn" editable="false" prefWidth="82.40008544921875" sortType="DESCENDING" text="IMDb" />
+                          <TableColumn id="rating-column" fx:id="ratingColumn" onEditCommit="#ratingEdit" prefWidth="91.19989013671875" sortType="DESCENDING" text="Rating" />
+                              <TableColumn id="watched-column" fx:id="watchedColumn" editable="false" prefWidth="92.800048828125" sortType="DESCENDING" text="Watched" />
+                        </columns>
+                      </TableView>
+                     </items>
+                     <padding>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </SplitPane>
+                  <TitledPane fx:id="titledPane" prefWidth="1000.0" text="Add Movie" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <content>
+                        <VBox prefHeight="200.0" prefWidth="998.0">
+                           <children>
+                              <VBox prefHeight="223.0" prefWidth="970.0" spacing="3.0" styleClass="add-movie-vbox">
+                                 <children>
+                                    <Label id="add-movie-label" prefHeight="30.0" prefWidth="970.0" text="Add Movie:" />
+                                    <HBox alignment="CENTER_LEFT" prefHeight="28.0" spacing="15.0" styleClass="add-movie-top-section">
+                                       <children>
+                                          <Label prefHeight="18.0" prefWidth="50.0" text="Title:" />
+                                          <TextField fx:id="addTitle" onAction="#addMovie" prefHeight="26.0" prefWidth="408.0" promptText="Movie Title..." />
+                                          <Region prefHeight="26.0" prefWidth="13.0" />
+                                          <Label prefHeight="18.0" prefWidth="53.0" text="Date:" />
+                                          <ComboBox fx:id="addDate" prefHeight="26.0" prefWidth="86.0" />
+                                          <Region prefHeight="28.0" prefWidth="77.0" />
+                                          <Label prefHeight="18.0" prefWidth="104.0" text="IMDb Rating:" />
+                                          <ComboBox fx:id="addRating" prefHeight="26.0" prefWidth="89.0" />
+                                       </children>
+                                    </HBox>
+                                    <Label text="Genres:" />
+                                    <GridPane prefHeight="122.0" prefWidth="900.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0000244140625" minWidth="10.0" prefWidth="135.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.93331298828124" minWidth="10.0" prefWidth="135.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.13338623046872" minWidth="10.0" prefWidth="135.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.79995117187502" minWidth="10.0" prefWidth="135.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.13338623046877" minWidth="10.0" prefWidth="135.0" />
+                                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="186.2000610351563" minWidth="10.0" prefWidth="135.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="182.4000366210937" minWidth="10.0" prefWidth="135.1999389648438" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <CheckBox fx:id="actionBox" mnemonicParsing="false" text="Action" />
+                                          <CheckBox fx:id="adventureBox" mnemonicParsing="false" text="Adventure" GridPane.columnIndex="1" />
+                                          <CheckBox fx:id="animationBox" mnemonicParsing="false" text="Animation" GridPane.columnIndex="2" />
+                                          <CheckBox fx:id="biographyBox" mnemonicParsing="false" text="Biography" GridPane.columnIndex="3" />
+                                          <CheckBox fx:id="comedyBox" mnemonicParsing="false" text="Comedy" GridPane.columnIndex="4" />
+                                          <CheckBox fx:id="crimeBox" mnemonicParsing="false" text="Crime" GridPane.columnIndex="5" />
+                                          <CheckBox fx:id="documentaryBox" mnemonicParsing="false" text="Documentary" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="dramaBox" mnemonicParsing="false" text="Drama" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="familyBox" mnemonicParsing="false" text="Family" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="fantasyBox" mnemonicParsing="false" text="Fantasy" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="historyBox" mnemonicParsing="false" text="History" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="horrorBox" mnemonicParsing="false" text="Horror" GridPane.rowIndex="2" />
+                                          <CheckBox fx:id="scifiBox" mnemonicParsing="false" text="Sci-Fi" GridPane.rowIndex="3" />
+                                          <CheckBox fx:id="westernBox" mnemonicParsing="false" text="Western" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                                          <CheckBox fx:id="warBox" mnemonicParsing="false" text="War" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                          <CheckBox fx:id="romanceBox" mnemonicParsing="false" text="Romance" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                                          <CheckBox fx:id="noirBox" mnemonicParsing="false" text="Noir" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                          <CheckBox fx:id="mysteryBox" mnemonicParsing="false" text="Mystery" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                          <CheckBox fx:id="musicalBox" mnemonicParsing="false" text="Musical" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <CheckBox fx:id="musicBox" mnemonicParsing="false" text="Music" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <CheckBox fx:id="sportBox" mnemonicParsing="false" text="Sport" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <CheckBox fx:id="superheroBox" mnemonicParsing="false" text="Superhero" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <CheckBox fx:id="thrillerBox" mnemonicParsing="false" text="Thriller" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                          <CheckBox fx:id="disneyBox" mnemonicParsing="false" text="Disney" GridPane.rowIndex="1" />
+                                          <Button id="add-button" fx:id="addButton" mnemonicParsing="false" onAction="#addMovie" prefHeight="51.0" prefWidth="90.0" text="Add" GridPane.columnIndex="6" GridPane.rowIndex="1" GridPane.rowSpan="2" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </content>
+                  </TitledPane>
                </children>
-            </GridPane>
-         </children>
-      </VBox>
-      <HBox alignment="CENTER" layoutX="386.0" layoutY="325.0" prefHeight="26.0" prefWidth="126.0" spacing="15.0" styleClass="top-movie-section" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
-         <children>
-            <Label id="top-movie-tag" alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" text="Top Movie:" />
-            <Label id="top-movie-info" fx:id="topMovieLabel" alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" text="N/A" />
-            <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity" text="Search:" />
-            <ComboBox fx:id="topGenresDropDown" onAction="#searchTopMovie" prefWidth="150.0" style="-fx-border-style: none,solid;" />
-         </children>
-      </HBox>
-      <HBox alignment="BOTTOM_CENTER" layoutX="4.0" layoutY="362.0" spacing="15.0" styleClass="table-options" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="6.0">
-         <children>
-            <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#shuffleButton" text="Shuffle" />
-            <VBox alignment="CENTER" prefHeight="56.0" prefWidth="224.0" spacing="3.0">
+            </AnchorPane>
+         </center>
+         <bottom>
+            <AnchorPane prefHeight="12.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="movieRecommendButton" disable="true" mnemonicParsing="false" onAction="#recommendByMovie" prefHeight="26.0" prefWidth="349.0" text="Recommend By Top Movie" />
-                  <Button fx:id="genreRecommendButton" disable="true" mnemonicParsing="false" onAction="#recommendByGenre" prefHeight="26.0" prefWidth="251.0" text="Recommend By Top Genres" />
+                  <HBox id="bottom-tab" alignment="CENTER" prefHeight="29.0" prefWidth="998.0" spacing="10.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                     <children>
+                        <Label fx:id="numMovies" prefHeight="18.0" prefWidth="684.0" text="Label" />
+                        <Label fx:id="saveLabel" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="183.0" text=" " textAlignment="RIGHT" />
+                        <Button mnemonicParsing="false" onAction="#save" prefHeight="26.0" prefWidth="135.0" text="Save data" />
+                     </children>
+                  </HBox>
                </children>
-            </VBox>
-            <Region prefHeight="56.0" prefWidth="60.0" />
-            <Button minWidth="-Infinity" mnemonicParsing="false" onAction="#deleteMovie" prefHeight="26.0" prefWidth="66.0" text="Delete" />
-            <Button fx:id="toggleSeenButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#toggleWatched" prefHeight="26.0" prefWidth="160.0" text="Toggle Seen/Unseen" />
-            <Region prefHeight="46.0" prefWidth="65.0" />
-        <Label alignment="CENTER_RIGHT" minWidth="-Infinity" prefHeight="18.0" prefWidth="105.0" text="Search Table:" />
-        <TextField fx:id="filterField" onAction="#updateLabel" prefHeight="26.0" prefWidth="151.0" />
-         </children>
-      </HBox>
-    <TableView fx:id="movieTable" editable="true" layoutX="8.0" layoutY="421.0" onKeyPressed="#handleKeyInput" onMouseClicked="#handleRowSelect" prefHeight="351.0" prefWidth="1000.0" tableMenuButtonVisible="false" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-      <columns>
-        <TableColumn id="title-column" fx:id="titleColumn" editable="false" prefWidth="371.9999694824219" text="Title" />
-            <TableColumn id="date-column" fx:id="dateColumn" editable="false" prefWidth="85.60003662109375" sortType="DESCENDING" text="Date" />
-            <TableColumn id="genre-column" fx:id="genreColumn" editable="false" prefWidth="252.00006103515625" text="Genre(s)" />
-            <TableColumn id="imdb-rating-column" fx:id="imdbRatingColumn" editable="false" prefWidth="82.40008544921875" sortType="DESCENDING" text="IMDb" />
-        <TableColumn id="rating-column" fx:id="ratingColumn" onEditCommit="#ratingEdit" prefWidth="91.19989013671875" sortType="DESCENDING" text="Rating" />
-            <TableColumn id="watched-column" fx:id="watchedColumn" editable="false" prefWidth="92.800048828125" sortType="DESCENDING" text="Watched" />
-      </columns>
-    </TableView>
-      <HBox id="bottom-tab" alignment="CENTER" prefHeight="19.0" prefWidth="970.0" spacing="10.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
-         <children>
-            <Label fx:id="numMovies" prefHeight="18.0" prefWidth="684.0" text="Label" />
-            <Label fx:id="saveLabel" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="183.0" text=" " textAlignment="RIGHT" />
-            <Button mnemonicParsing="false" onAction="#save" prefHeight="26.0" prefWidth="135.0" text="Save data" />
-         </children>
-      </HBox>
-      <Separator layoutX="205.0" layoutY="310.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            </AnchorPane>
+         </bottom>
+      </BorderPane>
   </children>
 </AnchorPane>

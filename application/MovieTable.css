@@ -164,14 +164,41 @@
 
 
 
+.titled-pane .title
+{
+	-fx-text-fill: white;
+	-fx-background-color: brightnavy;  	
+	-fx-background-radius: 0.0em;
+}
+.titled-pane .title .text
+{
+	-fx-fill: white;	
+}
+.titled-pane .content
+{
+	-fx-background-color: white;  	
+}
+.titled-pane .arrow
+{
+	-fx-mark-color: white;  	
+}
 
-
-
-
-
+.split-pane:vertical
+{
+	-fx-background-color: transparent;
+}
+.split-pane:vertical .split-pane-divider
+{
+   -fx-padding: 0 0.25em 0 0.25em; 
+   -fx-background-color: transparent;
+}
 
 /* -------------- Table View -------------- */
-
+.table-view
+{
+	-fx-border-color: frenchblue;
+	-fx-border-width: 0.1em;
+}
 /* ------- Column Headers ------- */
 /* Header Cells */
 .table-view .column-header,
@@ -189,7 +216,7 @@
 /* Sort Arrow */
 .table-view .arrow
 {  
-	-fx-mark-color: white ;  
+	-fx-mark-color: white;  
 }  
 /* ------- Cells ------- */
 /* Unwatched, Unselected Row */

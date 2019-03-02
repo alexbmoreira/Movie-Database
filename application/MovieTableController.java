@@ -19,11 +19,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
@@ -141,8 +143,13 @@ public class MovieTableController
 	@FXML
 	Label numMovies;
 	@FXML
-	Label saveLabel; 
-	
+	Label saveLabel;
+
+	@FXML
+	TitledPane titledPane;
+	@FXML
+	SplitPane splitPane;
+
 	private Callback<TableColumn<Movie, String>, TableCell<Movie, String>> defaultTextFieldCellFactory = TextFieldTableCell
 			.<Movie>forTableColumn();
 	private ObservableList<Movie> masterData = FXCollections.observableArrayList();
@@ -288,6 +295,13 @@ public class MovieTableController
 		tooltips();
 		addCheckBoxes();
 		setAddValues();
+
+		titledPane.expandedProperty().addListener((obs, wasExpanded, isNowExpanded) -> {
+			if(!isNowExpanded)
+			{
+				splitPane.setDividerPositions(0);
+			}
+		});
 
 		// 0. Initialize the columns.
 		titleColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
@@ -626,7 +640,7 @@ public class MovieTableController
 	{
 		saveLabel.setText("Saving...");
 		saveLabel.setTextFill(Color.BLACK);
-		
+
 		DBConnect connection = new DBConnect();
 		MovieCatalog seen = new MovieCatalog();
 

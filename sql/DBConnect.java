@@ -18,7 +18,7 @@ public class DBConnect
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
 			conn = DriverManager.getConnection(
-					"Amazon AWS Databse", "user",
+					"Amazon AWS Database", "user",
 					"userpass");
 
 			state = conn.createStatement();

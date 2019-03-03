@@ -38,9 +38,9 @@ public class LoginController
 	
 	public void loadData()
 	{
-		if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty())
+		if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty() || usernameField.getText().contains(" ") || passwordField.getText().contains(" "))
 		{
-			errorLabel.setText("Empty username/password");
+			errorLabel.setText("Invalid username/password");
 			errorLabel.setTextFill(Color.RED);
 			return;
 		}
@@ -77,9 +77,9 @@ public class LoginController
 	
 	public void newData()
 	{
-		if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty())
+		if(usernameField.getText().isEmpty() || passwordField.getText().isEmpty() || usernameField.getText().contains(" ") || passwordField.getText().contains(" "))
 		{
-			errorLabel.setText("Empty username/password");
+			errorLabel.setText("Invalid username/password");
 			errorLabel.setTextFill(Color.RED);
 			return;
 		}
